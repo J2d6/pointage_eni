@@ -2,7 +2,7 @@
 
 import DayAside from "@/components/dayAside"
 import ListCoursNav from "@/components/listCoursNav"
-
+import ListCours from "@/components/ListCours"
 
 
 export default function Page() {
@@ -11,9 +11,7 @@ export default function Page() {
         <ListCoursNav />
         <div className=" flex flex-row content flex-1">
             <DayAside />
-            <main className=" flex-1">
-                
-            </main>    
+            <ListCours />
         </div>            
     </div>
     )
