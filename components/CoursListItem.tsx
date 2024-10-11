@@ -1,6 +1,6 @@
 export default function CoursListItem( cours  : {nom : string, classe: string , horaire : string, salle : string}) {
     return (
-        <div className=" px-8 h-16 border w-full border-lime-2600 flex flex-row justify-between ">
+        <div className=" px-12 h-16 border w-full border-lime-2600 flex flex-row justify-between ">
             <div className="  border-blue-950 flex flex-col">
                 <span className=" font-bold "> {cours.nom} </span>
                 <span> {cours.horaire} </span>

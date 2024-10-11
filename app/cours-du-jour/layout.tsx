@@ -1,12 +1,18 @@
+import { inter, lusitana } from "@/utils/ui/font";
+
 export default function Layout({
     children,
   }: {
     children: React.ReactNode;
   }) {
     return (
-        <div>
-            {children}
-        </div>
-    
+      <html>
+        <head>
+          <title> Pointage-ENI </title>
+        </head>
+        <body className = {` ${inter.className}   antialised `} >
+          {children}
+        </body>
+      </html>   
     )
 }

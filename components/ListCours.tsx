@@ -9,7 +9,7 @@ export default function ListCours() {
     ]
     
     return (
-        <main className="flex-1  border-black">
+        <main className="flex-1 p-4 border-black">
             {/* <div>
                 <CoursFilter />
             </div> */}
