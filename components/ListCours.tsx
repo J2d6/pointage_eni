@@ -1,20 +1,21 @@
+import { getCoursForProfesseurThisWeek } from "@/services/db_services/getCours";
 import CoursListItem from "./CoursListItem"
-import CoursFilter from "./ListCoursFilter"
 
-export default function ListCours() {
-    const listCours = [
-        {nom : "MERISE", classe : "M1 GB", horaire : "9h - 10h30", salle : "S01"},
-        {nom : "ROUTE IP", classe : "M1 IG" , horaire : "13h30 - 15h", salle : "S05"},
-        {nom : "TECH JAVA", classe : "L3" , horaire : "7h30 - 9h", salle : "S03"},
-    ]
-    
+export default async function ListCours() {
+   
+    let courses;
+    try {
+        courses = await getCoursForProfesseurThisWeek(1)
+        console.log(courses);
+    } catch (error) {
+        console.error(error);
+    }
+     const listCours = courses
     return (
         <main className="flex-1 p-4 border-black">
-            {/* <div>
-                <CoursFilter />
-            </div> */}
+
             {
-                listCours.map(
+                listCours!.map(
                     (cours, index) => CoursListItem(cours)
                 )
             }
