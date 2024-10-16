@@ -399,3 +399,7 @@ export type Enums<
     export type CoursWithClasse = Tables<'cours'> & {
       classe: Tables<'classe'> | null;
     } ;
+
+    export type EleveWithNotification = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null
+    }

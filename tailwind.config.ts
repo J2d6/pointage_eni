@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        border_grey_clair : "#D9D9D9",
         base_blanc:"#F6F6F2",
         text_grey : "#5E5E5E",
         border_green:"#00A02D",
