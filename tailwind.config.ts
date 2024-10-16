@@ -19,6 +19,14 @@ const config = {
     },
     extend: {
       colors: {
+        base_blanc:"#F6F6F2",
+        text_grey : "#5E5E5E",
+        border_green:"#00A02D",
+        vert_fonce_hover : "#028624",
+        line_grey :"#C1C1C1",
+        base_vert : "#0ADE4E",
+        base : "#FAF9E8",
+        vert_clair : "#00BB3C",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
