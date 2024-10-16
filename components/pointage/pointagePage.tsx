@@ -1,6 +1,6 @@
 import { getCoursById } from "@/services/db_services/getCours";
 import { getStudentsWithNotificationsByKnownCourse } from "@/services/db_services/getEleves";
-import { CoursWithClasse, Tables } from "@/services/db_services/supabase"
+import { CoursWithClasse, EleveWithNotification, Tables } from "@/services/db_services/supabase"
 import { useEffect, useState } from "react";
 import EleveList from "./eleveList";
 
@@ -10,7 +10,7 @@ interface PointagePageProps {
 
 export default function PointagePage({idCours} : PointagePageProps) {
     let cours : CoursWithClasse;
-    const [elevesList, setElevesList] = useState<Tables<'eleve'>[]>()
+    const [elevesList, setElevesList] = useState<EleveWithNotification[]>()
 
     useEffect(() => {
         const getData = async () => {
