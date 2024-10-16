@@ -15,8 +15,9 @@ export default function EleveListItem({eleve} : EleveListItem) {
         <div
             className= {`
                 flex flex-row   
-                border border-black 
+                border border-border_green 
                 p-2
+                rounded
             `}
         >
             <EleveIdentityCard eleve={eleve}/>
