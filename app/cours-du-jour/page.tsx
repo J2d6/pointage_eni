@@ -1,18 +1,9 @@
 'use client'
 
-import DayAside from "@/components/dayAside"
-import ListCoursNav from "@/components/listCoursNav"
-import ListCours from "@/components/ListCours"
+// import ListCoursPage from "@/components/cours/listCoursPage"
+import Wrapper from "@/components/cours/wrapper"
 
 
 export default function Page() {
-    return (
-        <div className="wrap h-screen flex flex-col">
-        <ListCoursNav />
-        <div className=" flex flex-row content flex-1">
-            <DayAside />
-            <ListCours />
-        </div>            
-    </div>
-    )
+    return < Wrapper idProf={1}/>
 }
