@@ -3,7 +3,7 @@
 
 import HeaderSection from "@/components/pointage/headerSection";
 import PointagePage from "@/components/pointage/pointagePage";
-import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
 

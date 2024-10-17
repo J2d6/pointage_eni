@@ -2,6 +2,7 @@ import { CoursWithClasse, EleveWithNotification, EleveWithNotificationAndClasse,
 import EleveListItem from "./eleveItem";
 import { useEffect, useState } from "react";
 import { mapToPointage } from "@/lib/eleve";
+import { togglePresenceStatus } from "@/lib/pointage";
 
 interface EleveListProps {
     elevesList: EleveWithNotificationAndClasse[],
@@ -11,8 +12,11 @@ interface EleveListProps {
 export default function EleveList({ elevesList , cours }: EleveListProps) {
     const [listEleve, setListEleve] = useState(elevesList)
     const [ready, setReady] = useState<boolean>(false)
-
     const [pointageList, setPointageList] = useState<PointageWithEleveAndCoursAndNotification[]>()
+
+    const handlePresenceStatus = function (pointage : PointageWithEleveAndCoursAndNotification) {
+        togglePresenceStatus(pointageList!, pointage, setPointageList)
+    }
     useEffect(() => {
         const constructData = async () => {
             try { 
@@ -38,7 +42,7 @@ export default function EleveList({ elevesList , cours }: EleveListProps) {
             {
                 ready ? 
                     pointageList!.map((pointage) => (
-                        <EleveListItem key={pointage.id_eleve} pointage = {pointage} />
+                        <EleveListItem key={pointage.id_eleve} pointage = {pointage} handlePResenceStatus={handlePresenceStatus} />
                     ))
                 : " Loading ..."
             }

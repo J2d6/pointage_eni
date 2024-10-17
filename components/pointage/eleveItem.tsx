@@ -2,13 +2,15 @@ import { EleveWithNotification, PointageWithEleveAndCoursAndNotification, Tables
 import { Calendar } from 'lucide-react';
 import EleveIdentityCard from "./eleveIdentityCard";
 import AddNotif from "./addNotification";
+import TogglePresenceForm from "./togglePresenceStatus";
 
 interface EleveListItem {
-    pointage : PointageWithEleveAndCoursAndNotification
+    pointage : PointageWithEleveAndCoursAndNotification,
+    handlePResenceStatus : (pointage: PointageWithEleveAndCoursAndNotification) => void
 }
 
 
-export default function EleveListItem({pointage} : EleveListItem) {
+export default function EleveListItem({pointage, handlePResenceStatus} : EleveListItem) {
     const handleNotifClick = function () {
         alert(JSON.stringify(pointage.eleve.notification))
     }
@@ -43,11 +45,7 @@ export default function EleveListItem({pointage} : EleveListItem) {
                         <AddNotif />
                     </div>
                 </div>
-                <div className={`flex flex-1  border-green-600 flex-row items-center justify-evenly `}>
-                    <span>En retard</span>
-                    <span> Absent(e) </span>
-                    <span> Present(e)</span>
-                </div>
+                < TogglePresenceForm />
             </div>
         </div>
     )
