@@ -210,6 +210,7 @@ export type Database = {
           id_cours: number
           id_eleve: number
           id_pointage: number
+          retard: boolean
           statut_presence: boolean
         }
         Insert: {
@@ -217,6 +218,7 @@ export type Database = {
           id_cours: number
           id_eleve: number
           id_pointage?: number
+          retard: boolean
           statut_presence: boolean
         }
         Update: {
@@ -224,6 +226,7 @@ export type Database = {
           id_cours?: number
           id_eleve?: number
           id_pointage?: number
+          retard?: boolean
           statut_presence?: boolean
         }
         Relationships: [
@@ -413,7 +416,7 @@ export type CompositeTypes<
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
 
-
+     
     export type CoursWithClasse = Tables<'cours'> & {
       classe: Tables<'classe'> | null;
     } ;
