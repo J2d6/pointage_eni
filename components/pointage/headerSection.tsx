@@ -31,7 +31,8 @@ export default function HeaderSection({
     return (
         <section
             className={`
-                flex flex-col gap-1    
+                flex flex-col gap-1    w-full 
+                fixed top-16
             `}
         >
             <div

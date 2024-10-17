@@ -11,7 +11,7 @@ export default function PointagePageLayout({
         <head>
           <title> Pointage-ENI </title>
         </head>
-        <body className = {` ${inter.className}   antialised `} >
+        <body className = {` ${inter.className}  bg-base antialised `} >
             <NavBarPointage />
             {children}
         </body>

@@ -1,14 +1,14 @@
 import { CoursWithClasse, EleveWithNotificationAndClasse, PointageWithEleveAndCoursAndNotification, Tables } from "@/services/db_services/supabase";
 
 
-const tete : Tables<'eleve'>  | null = null ; 
-export const mapTiPointage = function (
+
+export const mapToPointage = function (
     elevesList : EleveWithNotificationAndClasse[], 
     cours : CoursWithClasse
 ) : PointageWithEleveAndCoursAndNotification[] {
     const pointageTable : PointageWithEleveAndCoursAndNotification[] = elevesList.map(
         eleve => {
-            return {
+            const tmp = {
                 date: cours.horaire,
                 id_cours: cours.id_cours,
                 id_eleve: eleve.id_eleve,
@@ -16,6 +16,9 @@ export const mapTiPointage = function (
                 eleve : eleve,
                 cours : cours
             }
+            console.log(tmp);
+            
+            return tmp
         }
     )
 

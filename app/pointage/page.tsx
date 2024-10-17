@@ -11,7 +11,7 @@ export default function Page() {
     const  idCours  = params.get("idCours")
 
     return (
-        <main>
+        <main className="mt-16 h-screen flex flex-col">
             <HeaderSection idCours={parseInt(idCours!)}/>
             <PointagePage idCours={parseInt(idCours!)} />
         </main>
