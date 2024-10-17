@@ -1,18 +1,26 @@
-import { EleveWithNotification, PointageWithEleveAndCoursAndNotification, Tables } from "@/services/db_services/supabase";
+import { PointageWithEleveAndCoursAndNotification } from "@/services/db_services/supabase";
 import { Calendar } from 'lucide-react';
 import EleveIdentityCard from "./eleveIdentityCard";
 import AddNotif from "./addNotification";
 import TogglePresenceForm from "./togglePresenceStatus";
+import _ from "lodash";
 
 interface EleveListItem {
     pointage : PointageWithEleveAndCoursAndNotification,
-    handlePResenceStatus : (pointage: PointageWithEleveAndCoursAndNotification) => void
+    handlePresenceStatus : (pointage: PointageWithEleveAndCoursAndNotification) => void
 }
 
 
-export default function EleveListItem({pointage, handlePResenceStatus} : EleveListItem) {
+export default function EleveListItem({pointage, handlePresenceStatus} : EleveListItem) {
     const handleNotifClick = function () {
         alert(JSON.stringify(pointage.eleve.notification))
+    }
+
+    const handlePresence = function (status : boolean, retard : boolean) {
+        const pointageUpdated = _.cloneDeep(pointage); // DEEP COPY
+        pointageUpdated.retard = retard;
+        pointageUpdated.statut_presence = status
+        handlePresenceStatus(pointageUpdated)
     }
     return (
         <div
@@ -45,7 +53,7 @@ export default function EleveListItem({pointage, handlePResenceStatus} : EleveLi
                         <AddNotif />
                     </div>
                 </div>
-                < TogglePresenceForm />
+                < TogglePresenceForm id_eleve={pointage.id_eleve} status={pointage.statut_presence} retard={pointage.retard}  handlePresence={handlePresence}/>
             </div>
         </div>
     )

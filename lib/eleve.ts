@@ -13,7 +13,7 @@ export const mapToPointage = function (
                 id_cours: cours.id_cours,
                 id_eleve: eleve.id_eleve,
                 statut_presence: true, 
-                retard : true,
+                retard : false,
                 eleve : eleve,
                 cours : cours
             }

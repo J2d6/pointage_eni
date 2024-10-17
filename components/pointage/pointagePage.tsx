@@ -29,7 +29,7 @@ export default function PointagePage({idCours} : PointagePageProps) {
     }, []);
     return (
         <section className="mt-[12rem] overflow-y-auto h-[calc(100vh-12rem)]">
-                  <EleveList elevesList={elevesList!} cours = {cours!} />
+            <EleveList elevesList={elevesList!} cours = {cours!} />
         </section>
   
 

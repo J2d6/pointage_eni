@@ -5,5 +5,5 @@ import Wrapper from "@/components/cours/wrapper"
 
 
 export default function Page() {
-    return < Wrapper idProf={1}/>
+    return < Wrapper idProf={2}/>
 }

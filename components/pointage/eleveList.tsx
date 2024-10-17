@@ -12,7 +12,7 @@ interface EleveListProps {
 export default function EleveList({ elevesList , cours }: EleveListProps) {
     const [listEleve, setListEleve] = useState(elevesList)
     const [ready, setReady] = useState<boolean>(false)
-    const [pointageList, setPointageList] = useState<PointageWithEleveAndCoursAndNotification[]>()
+    const [pointageList, setPointageList] = useState<PointageWithEleveAndCoursAndNotification[]>([])
 
     const handlePresenceStatus = function (pointage : PointageWithEleveAndCoursAndNotification) {
         togglePresenceStatus(pointageList!, pointage, setPointageList)
@@ -35,14 +35,14 @@ export default function EleveList({ elevesList , cours }: EleveListProps) {
 
          constructData();     
        
-    }, [elevesList, cours, pointageList]);
+    }, [elevesList, cours]);
 
     return (
         <div className="flex flex-col gap-2 mt-4 p-4">
             {
                 ready ? 
                     pointageList!.map((pointage) => (
-                        <EleveListItem key={pointage.id_eleve} pointage = {pointage} handlePResenceStatus={handlePresenceStatus} />
+                        <EleveListItem key={pointage.id_eleve} pointage = {pointage} handlePresenceStatus={handlePresenceStatus} />
                     ))
                 : " Loading ..."
             }
