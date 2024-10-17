@@ -1,5 +1,5 @@
 import { createClient }  from "@supabase/supabase-js";
-import { CoursWithClasse, Database, Tables } from "./supabase";
+import { CoursWithClasse, Database, EleveWithNotificationAndClasse, Tables } from "./supabase";
 import { getCoursById } from "./getCours";
 // import { createClient } from "jsr:@supabase/supabase-js@2";
 import { resetTimeToMidnight } from "@/lib/date";
@@ -78,7 +78,7 @@ export async function getStudentsWithNotificationsByCourse(
 
 export async function getStudentsWithNotificationsByKnownCourse(
     cours: CoursWithClasse
-  ) {
+  ) : Promise<EleveWithNotificationAndClasse[]> {
    
 
   
@@ -87,6 +87,9 @@ export async function getStudentsWithNotificationsByKnownCourse(
       .select(`
         *,
         notification (
+          *
+        ),
+        classe (
           *
         )
       `)

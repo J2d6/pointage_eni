@@ -421,3 +421,13 @@ export type CompositeTypes<
     export type EleveWithNotification = Tables<'eleve'> & {
       notification : Tables<'notification'>[] | null
     }
+
+    export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null,
+      classe : Tables<'classe'> | null
+    } 
+
+    export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
+      eleve : EleveWithNotification, 
+      cours : CoursWithClasse
+    }
