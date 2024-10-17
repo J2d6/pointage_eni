@@ -9,14 +9,15 @@ interface PointagePageProps {
 }
 
 export default function PointagePage({idCours} : PointagePageProps) {
-    let cours : CoursWithClasse;
+    const [cours, setCours ] = useState<CoursWithClasse>()
     const [elevesList, setElevesList] = useState<EleveWithNotification[]>()
 
     useEffect(() => {
         const getData = async () => {
             try { 
-                cours = (await getCoursById(idCours))[0]
-                const eleves = await getStudentsWithNotificationsByKnownCourse(cours)
+                const course = (await getCoursById(idCours))[0]
+                setCours(course)
+                const eleves = await getStudentsWithNotificationsByKnownCourse(cours!)
                 setElevesList(eleves)
 
             } catch (error) {
@@ -28,6 +29,6 @@ export default function PointagePage({idCours} : PointagePageProps) {
        
     }, []);
     return (
-        <EleveList elevesList={elevesList!}/>
+        <EleveList elevesList={elevesList!} cours = {cours!} />
     )
 }
