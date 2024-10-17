@@ -80,6 +80,7 @@ export type Database = {
       }
       cours: {
         Row: {
+          duree: number | null
           horaire: string
           id_annee_scolaire: number
           id_classe: number
@@ -89,6 +90,7 @@ export type Database = {
           salle: string | null
         }
         Insert: {
+          duree?: number | null
           horaire: string
           id_annee_scolaire: number
           id_classe: number
@@ -98,6 +100,7 @@ export type Database = {
           salle?: string | null
         }
         Update: {
+          duree?: number | null
           horaire?: string
           id_annee_scolaire?: number
           id_classe?: number
@@ -162,42 +165,42 @@ export type Database = {
       notification: {
         Row: {
           date: string | null
-          id_cours: number | null
           id_eleve: number
           id_notification: number
+          id_professeur: number | null
           message: string
           type_notification: string
         }
         Insert: {
           date?: string | null
-          id_cours?: number | null
           id_eleve: number
           id_notification?: number
+          id_professeur?: number | null
           message: string
           type_notification: string
         }
         Update: {
           date?: string | null
-          id_cours?: number | null
           id_eleve?: number
           id_notification?: number
+          id_professeur?: number | null
           message?: string
           type_notification?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "notification_id_cours_fkey"
-            columns: ["id_cours"]
-            isOneToOne: false
-            referencedRelation: "cours"
-            referencedColumns: ["id_cours"]
-          },
           {
             foreignKeyName: "notification_id_eleve_fkey"
             columns: ["id_eleve"]
             isOneToOne: false
             referencedRelation: "eleve"
             referencedColumns: ["id_eleve"]
+          },
+          {
+            foreignKeyName: "notification_id_professeur_fkey"
+            columns: ["id_professeur"]
+            isOneToOne: false
+            referencedRelation: "professeur"
+            referencedColumns: ["id_professeur"]
           },
         ]
       }
@@ -207,6 +210,7 @@ export type Database = {
           id_cours: number
           id_eleve: number
           id_pointage: number
+          retard: boolean
           statut_presence: boolean
         }
         Insert: {
@@ -214,6 +218,7 @@ export type Database = {
           id_cours: number
           id_eleve: number
           id_pointage?: number
+          retard: boolean
           statut_presence: boolean
         }
         Update: {
@@ -221,6 +226,7 @@ export type Database = {
           id_cours?: number
           id_eleve?: number
           id_pointage?: number
+          retard?: boolean
           statut_presence?: boolean
         }
         Relationships: [
@@ -395,7 +401,36 @@ export type Enums<
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
     : never
 
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
 
+     
     export type CoursWithClasse = Tables<'cours'> & {
       classe: Tables<'classe'> | null;
     } ;
+
+    export type EleveWithNotification = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null
+    }
+
+    export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null,
+      classe : Tables<'classe'> | null
+    } 
+
+    export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
+      eleve : EleveWithNotification, 
+      cours : CoursWithClasse
+    }

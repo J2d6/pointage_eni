@@ -7,6 +7,8 @@ interface ListCoursProps {
 
 export default function ListCours({ courses }: ListCoursProps) { 
     
+    
+    
     return (
         <main className="flex-1 flex flex-col p-8 border-black gap-2 bg-base">
             {courses.map((cours, index) => (

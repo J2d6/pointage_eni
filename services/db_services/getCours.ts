@@ -24,7 +24,7 @@ const supabaseServer = createClient(
 
 
 
-export const getCoursById = async function (idCours : number) : Promise<Tables<'cours'>[]> {
+export const getCoursById = async function (idCours : number) : Promise<CoursWithClasse[]> {
 
         const {data : cours , error } = await supabaseServer
             .from('cours')
