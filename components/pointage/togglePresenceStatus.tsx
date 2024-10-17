@@ -1,5 +1,3 @@
-import { PointageWithEleveAndCoursAndNotification } from "@/services/db_services/supabase";
-
 interface TogglePresenceFormProps {
     handlePresence: (status: boolean, retard: boolean) => void;
     status: boolean;
