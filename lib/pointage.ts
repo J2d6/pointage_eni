@@ -1,4 +1,5 @@
-import { PointageWithEleveAndCoursAndNotification } from "@/services/db_services/supabase";
+import { pointer } from "@/services/db_services/pointage";
+import { PointageWithEleveAndCoursAndNotification, Tables, TablesInsert } from "@/services/db_services/supabase";
 
 
 export const togglePresenceStatus = function (
@@ -15,4 +16,18 @@ export const togglePresenceStatus = function (
             }
         )
     )
+}
+
+
+export const validate = async function (pointageList : PointageWithEleveAndCoursAndNotification[]) : Promise<boolean> {
+    try {
+        await Promise.all(
+            pointageList.map( pointage => pointer(pointage))
+        )
+
+        return true
+    } catch (error) {
+        alert(JSON.stringify(error))
+        return false
+    }
 }

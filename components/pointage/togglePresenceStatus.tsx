@@ -15,7 +15,7 @@ export default function TogglePresenceForm({ handlePresence, status, retard, id_
                     value="retard"
                     name={`${id_eleve}_presence_status`}
                     checked={retard}
-                    onChange={() => handlePresence(false, true)}
+                    onChange={() => handlePresence(true, true)}
                     className="w-4 h-4"
                 />
                 <label htmlFor={`status_retard_${id_eleve}`} className="ms-2 text-sm">Retard</label>

@@ -3,6 +3,7 @@ import EleveListItem from "./eleveItem";
 import { useEffect, useState } from "react";
 import { mapToPointage } from "@/lib/eleve";
 import PointageValidator from "./pointageValidator";
+import { validate } from "@/lib/pointage";
 
 interface EleveListProps {
     elevesList: EleveWithNotificationAndClasse[];
@@ -12,6 +13,9 @@ interface EleveListProps {
 export default function EleveList({ elevesList, cours }: EleveListProps) {
     const [pointageList, setPointageList] = useState<PointageWithEleveAndCoursAndNotification[]>([]);
     
+    const validatePointage = async function () {
+        await validate(pointageList)
+    }
     useEffect(() => {
         const listPointage = mapToPointage(elevesList, cours);
         setPointageList(listPointage);
@@ -40,7 +44,7 @@ export default function EleveList({ elevesList, cours }: EleveListProps) {
                     "Chargement des élèves..."
                 )}
             </div>
-            < PointageValidator />
+            < PointageValidator validator={validatePointage}/>
         </>
         
     );
