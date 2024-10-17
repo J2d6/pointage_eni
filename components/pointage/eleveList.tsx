@@ -2,6 +2,7 @@ import { CoursWithClasse, EleveWithNotificationAndClasse, PointageWithEleveAndCo
 import EleveListItem from "./eleveItem";
 import { useEffect, useState } from "react";
 import { mapToPointage } from "@/lib/eleve";
+import PointageValidator from "./pointageValidator";
 
 interface EleveListProps {
     elevesList: EleveWithNotificationAndClasse[];
@@ -10,7 +11,7 @@ interface EleveListProps {
 
 export default function EleveList({ elevesList, cours }: EleveListProps) {
     const [pointageList, setPointageList] = useState<PointageWithEleveAndCoursAndNotification[]>([]);
-
+    
     useEffect(() => {
         const listPointage = mapToPointage(elevesList, cours);
         setPointageList(listPointage);
@@ -25,18 +26,22 @@ export default function EleveList({ elevesList, cours }: EleveListProps) {
     };
 
     return (
-        <div className="flex flex-col gap-2 mt-4 p-4">
-            {pointageList.length > 0 ? (
-                pointageList.map((pointage) => (
-                    <EleveListItem
-                        key={pointage.id_eleve}
-                        pointage={pointage}
-                        handlePresenceStatus={handlePresenceStatus}
-                    />
-                ))
-            ) : (
-                "Chargement des élèves..."
-            )}
-        </div>
+        <>
+            <div className="flex flex-col gap-2 mt-4 p-4">
+                {pointageList.length > 0 ? (
+                    pointageList.map((pointage) => (
+                        <EleveListItem
+                            key={pointage.id_eleve}
+                            pointage={pointage}
+                            handlePresenceStatus={handlePresenceStatus}
+                        />
+                    ))
+                ) : (
+                    "Chargement des élèves..."
+                )}
+            </div>
+            < PointageValidator />
+        </>
+        
     );
 }

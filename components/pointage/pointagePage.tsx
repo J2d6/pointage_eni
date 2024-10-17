@@ -4,6 +4,7 @@ import { CoursWithClasse, EleveWithNotificationAndClasse } from "@/services/db_s
 import { useEffect, useState } from "react";
 import EleveList from "./eleveList";
 
+
 interface PointagePageProps {
     idCours: number;
 }
