@@ -6,15 +6,16 @@ interface TogglePresenceFormProps {
 }
 
 export default function TogglePresenceForm({ handlePresence, status, retard, id_eleve }: TogglePresenceFormProps) {
+    
     return (
-        <div className="flex flex-1">
+        <div className="flex justify-between flex-1">
             <div className="flex items-center me-4">
                 <input
                     id={`status_retard_${id_eleve}`}
                     type="radio"
                     value="retard"
                     name={`${id_eleve}_presence_status`}
-                    checked={retard}
+                    checked={retard && status }
                     onChange={() => handlePresence(true, true)}
                     className="w-4 h-4"
                 />
@@ -26,7 +27,7 @@ export default function TogglePresenceForm({ handlePresence, status, retard, id_
                     type="radio"
                     value="present"
                     name={`${id_eleve}_presence_status`}
-                    checked={status}
+                    checked={status && !retard}
                     onChange={() => handlePresence(true, false)}
                     className="w-4 h-4"
                 />
