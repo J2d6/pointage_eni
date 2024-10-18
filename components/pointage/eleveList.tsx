@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { mapToPointage } from "@/lib/eleve";
 import PointageValidator from "./pointageValidator";
 import { validate } from "@/lib/pointage";
+import { getPonintageListByCoursId } from "@/services/db_services/pointage";
 
 interface EleveListProps {
     elevesList: EleveWithNotificationAndClasse[];
@@ -17,8 +18,18 @@ export default function EleveList({ elevesList, cours }: EleveListProps) {
         await validate(pointageList)
     }
     useEffect(() => {
-        const listPointage = mapToPointage(elevesList, cours);
-        setPointageList(listPointage);
+
+        const getPointageList = async function () {
+            const listPointage = await getPonintageListByCoursId(cours.id_cours)
+            if (!listPointage.length) {
+                const newList = mapToPointage(elevesList, cours);
+                setPointageList(newList)
+            } else {
+                setPointageList(listPointage)
+            }
+        };
+
+        getPointageList();
     }, [elevesList, cours]);
 
     const handlePresenceStatus = (updatedPointage: PointageWithEleveAndCoursAndNotification) => {

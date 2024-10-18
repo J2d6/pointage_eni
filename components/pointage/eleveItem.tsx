@@ -23,8 +23,8 @@ export default function EleveListItem({ pointage, handlePresenceStatus }: EleveL
             <EleveIdentityCard eleve={pointage.eleve} />
             <div className="flex flex-col flex-1">
                 <div className="flex flex-row justify-between items-center">
-                    {pointage.eleve.notification?.length ? (
-                        <div onClick={() => alert(JSON.stringify(pointage.eleve.notification))}>
+                    {pointage.eleve!.notification?.length ? (
+                        <div onClick={() => alert(JSON.stringify(pointage.eleve!.notification))}>
                             <Calendar />
                         </div>
                     ) : (

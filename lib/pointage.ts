@@ -19,7 +19,13 @@ export const togglePresenceStatus = function (
 }
 
 
+function attendre(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const validate = async function (pointageList : PointageWithEleveAndCoursAndNotification[]) : Promise<boolean> {
+    await attendre(2000)
+    
     try {
         await Promise.all(
             pointageList.map( pointage => pointer(pointage))

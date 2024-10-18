@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import { Database, PointageWithEleveAndCoursAndNotification, TablesInsert } from "./supabase"
+import { Database, PointageWithEleveAndCoursAndNotification, TablesInsert , EleveWithNotification} from "./supabase"
 
 
 const supabaseServer = createClient<Database>(
@@ -9,7 +9,7 @@ const supabaseServer = createClient<Database>(
 
 export const pointer = async function (pointage : PointageWithEleveAndCoursAndNotification) {
     const pointageFined : TablesInsert<'pointage'> =  {
-        date: pointage.cours.horaire,
+        date: pointage.cours!.horaire,
         id_cours: pointage.id_cours,
         id_eleve: pointage.id_eleve,
         retard: pointage.retard,
@@ -18,10 +18,30 @@ export const pointer = async function (pointage : PointageWithEleveAndCoursAndNo
 
     const { data : pointageDone, error } = await supabaseServer
         .from('pointage')
-        .insert(pointageFined)
+        .upsert(pointageFined)
         .select()
 
     if (error) {
         throw new Error(error.message)
     }
+}
+
+export const getPonintageListByCoursId = async function (id_cours : number ) : Promise<PointageWithEleveAndCoursAndNotification[]  > {
+    const { data: pointagesData, error } = await supabaseServer
+    .from('pointage')
+    .select(`
+      *,
+      eleve (
+        *,
+        notification (*)
+      ),
+      cours (*, classe(*))
+    `)
+    .eq('id_cours', id_cours) 
+   
+    if (error) {
+        throw new Error(error.message)
+    }
+
+    return  pointagesData || [] 
 }

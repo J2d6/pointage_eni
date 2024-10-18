@@ -207,22 +207,28 @@ export type Database = {
       pointage: {
         Row: {
           date: string
+          id: number | null
           id_cours: number
           id_eleve: number
+          idPointage: number | null
           retard: boolean
           statut_presence: boolean
         }
         Insert: {
           date: string
+          id?: number | null
           id_cours: number
           id_eleve: number
+          idPointage?: number | null
           retard: boolean
           statut_presence: boolean
         }
         Update: {
           date?: string
+          id?: number | null
           id_cours?: number
           id_eleve?: number
+          idPointage?: number | null
           retard?: boolean
           statut_presence?: boolean
         }
@@ -414,21 +420,20 @@ export type CompositeTypes<
     : never
 
 
-       
-export type CoursWithClasse = Tables<'cours'> & {
-  classe: Tables<'classe'> | null;
-} ;
-
-export type EleveWithNotification = Tables<'eleve'> & {
-  notification : Tables<'notification'>[] | null
-}
-
-export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
-  notification : Tables<'notification'>[] | null,
-  classe : Tables<'classe'> | null
-} 
-
-export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
-  eleve : EleveWithNotification, 
-  cours : CoursWithClasse
-}
+    export type CoursWithClasse = Tables<'cours'> & {
+      classe: Tables<'classe'> | null;
+    } ;
+    
+    export type EleveWithNotification = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null
+    }
+    
+    export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
+      notification : Tables<'notification'>[] | null,
+      classe : Tables<'classe'> | null
+    } 
+    
+    export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
+      eleve : EleveWithNotification | null, 
+      cours : CoursWithClasse | null
+    }
