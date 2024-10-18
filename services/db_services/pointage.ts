@@ -38,6 +38,7 @@ export const getPonintageListByCoursId = async function (id_cours : number ) : P
       cours (*, classe(*))
     `)
     .eq('id_cours', id_cours) 
+    .order('id_eleve', {ascending : true})
    
     if (error) {
         throw new Error(error.message)
