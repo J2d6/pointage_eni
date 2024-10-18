@@ -209,7 +209,6 @@ export type Database = {
           date: string
           id_cours: number
           id_eleve: number
-          id_pointage: number
           retard: boolean
           statut_presence: boolean
         }
@@ -217,7 +216,6 @@ export type Database = {
           date: string
           id_cours: number
           id_eleve: number
-          id_pointage?: number
           retard: boolean
           statut_presence: boolean
         }
@@ -225,7 +223,6 @@ export type Database = {
           date?: string
           id_cours?: number
           id_eleve?: number
-          id_pointage?: number
           retard?: boolean
           statut_presence?: boolean
         }
@@ -416,21 +413,22 @@ export type CompositeTypes<
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
 
-     
-    export type CoursWithClasse = Tables<'cours'> & {
-      classe: Tables<'classe'> | null;
-    } ;
 
-    export type EleveWithNotification = Tables<'eleve'> & {
-      notification : Tables<'notification'>[] | null
-    }
+       
+export type CoursWithClasse = Tables<'cours'> & {
+  classe: Tables<'classe'> | null;
+} ;
 
-    export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
-      notification : Tables<'notification'>[] | null,
-      classe : Tables<'classe'> | null
-    } 
+export type EleveWithNotification = Tables<'eleve'> & {
+  notification : Tables<'notification'>[] | null
+}
 
-    export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
-      eleve : EleveWithNotification, 
-      cours : CoursWithClasse
-    }
+export type EleveWithNotificationAndClasse = Tables<'eleve'> & {
+  notification : Tables<'notification'>[] | null,
+  classe : Tables<'classe'> | null
+} 
+
+export type PointageWithEleveAndCoursAndNotification = TablesInsert<'pointage'> & {
+  eleve : EleveWithNotification, 
+  cours : CoursWithClasse
+}
