@@ -1,17 +1,19 @@
+
 import { Tables } from "@/services/db_services/supabase";
 import Link from "next/link";
 
 interface EleveIdentityCardProps {
-    eleve: Tables<'eleve'>
+    eleve: Tables<'eleve'>, 
+    idProf : number
 }
 
-export default function EleveIdentityCard({ eleve }: EleveIdentityCardProps) {
+export default function EleveIdentityCard({ eleve, idProf }: EleveIdentityCardProps) {
     
 
     return ( 
         <div className="flex flex-row items-center  flex-1 h-22   border-rose-600" >
             <Link
-                href={`/dashboard?id_eleve=${eleve.id_eleve}`}
+                href={`/dashboard?id_eleve=${eleve.id_eleve}&id_prof=${idProf}`}
             >    
                 <div className="flex flex-row items-center  border-green-500">
                         <img className="rounded-full w-11 h-11 " src={`/images/${eleve.id_eleve}.jpg`} alt="profile picture" />

@@ -4,7 +4,7 @@ import EleveIdentityCard from "./eleveIdentityCard";
 import AddNotif from "./addNotification";
 import TogglePresenceForm from "./togglePresenceStatus";
 import _ from "lodash";
-import Link from "next/link";
+
 
 interface EleveListItemProps {
     pointage: PointageWithEleveAndCoursAndNotification;
@@ -22,7 +22,7 @@ export default function EleveListItem({ pointage, handlePresenceStatus }: EleveL
     return (
        
             <div className="flex flex-row border border-border_green p-2 rounded bg-base_blanc h-24">
-                <EleveIdentityCard eleve={pointage.eleve!} />
+                <EleveIdentityCard idProf={pointage.cours?.id_professeur!}  eleve={pointage.eleve!} />
                 <div className="flex flex-col flex-1">
                     <div className="flex flex-row justify-between items-center">
                         {pointage.eleve!.notification?.length ? (

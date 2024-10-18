@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import { Database, PointageWithEleveAndCoursAndNotification, TablesInsert , EleveWithNotification} from "./supabase"
+import { Database, PointageWithEleveAndCoursAndNotification, TablesInsert , EleveWithNotification, PointageWithCours} from "./supabase"
 
 
 const supabaseServer = createClient<Database>(
@@ -45,4 +45,25 @@ export const getPonintageListByCoursId = async function (id_cours : number ) : P
     }
 
     return  pointagesData || [] 
+}
+
+
+export const getPointagesForEleveAndProf = async function (id_eleve: number, id_professeur: number) : Promise<PointageWithCours[]>{
+  const { data, error } = await supabaseServer
+    .from('pointage')
+    .select(`
+      *,
+      cours (
+        *
+      )
+    `)
+    .eq('id_eleve', id_eleve)
+    .eq('cours.id_professeur', id_professeur);
+
+  if (error) {
+    console.error('Erreur lors de la récupération des pointages:', error);
+   
+  }
+
+  return data || [];
 }

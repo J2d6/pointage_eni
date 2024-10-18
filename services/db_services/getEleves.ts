@@ -33,6 +33,18 @@ export const getElevesPerClass = async function (id_classe : number) : Promise<T
 // const eleves = await getElevesPerClass(1)
 // console.log(eleves);
 
+export const getEleveById = async function (id_eleve : number) : Promise<Tables<'eleve'>[]> {
+  const { data: eleve, error } = await supabaseServer
+        .from('eleve')
+        .select('*')
+        .eq('id_eleve', id_eleve);
+
+    if (error) {
+        throw new Error(error.message)
+    }
+
+    return eleve || [] ;
+}
 
 
 export async function getStudentsWithNotificationsByCourse(

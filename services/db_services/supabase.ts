@@ -437,3 +437,7 @@ export type CompositeTypes<
       eleve : EleveWithNotification | null, 
       cours : CoursWithClasse | null
     }
+
+    export type PointageWithCours = Tables<'pointage'> & {
+        cours : Tables<'cours'> | null
+    }
